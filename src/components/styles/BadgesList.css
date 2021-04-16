@@ -1,0 +1,44 @@
+.Badge__container {
+    margin: 0 auto;
+}
+
+.Badge__container li {
+    margin-bottom: 1rem;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.23);
+    border-radius: 5px;
+    display: flex;
+    padding: 1rem;
+}
+
+.Badge__container li img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+.Badge__container li p {
+    margin-bottom: 0;
+}
+
+.Badge__container-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.Badge__container-data .Badge__data .Badge__data-img {
+    height: 20px;
+}
+
+.Badge__container p:first-child {
+    font-weight: bold;
+}
+
+.Badge__data {
+    font-weight: bold;
+    color: #00acee;
+}
+
+.data {
+    margin-left: 30px;
+}
