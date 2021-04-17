@@ -15,7 +15,7 @@ export class BadgesList extends Component {
                   {badge.firstName} {badge.lastName}
                 </p>
                 <p className="Badge__data">
-                  <img className="Badge__data-img" src={logoTwitter} alt="Twitter Logo" />@{badge.twitter}
+                  <img className="Badge__data-img" src={logoTwitter} alt="Twitter Logo" /><span className="twitter">@{badge.twitter}</span>
                 </p>
                 <p className="data">{badge.jobTitle}</p>
               </div>

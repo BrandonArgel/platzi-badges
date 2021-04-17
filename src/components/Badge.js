@@ -19,7 +19,7 @@ class Badge extends Component {
         </div>
         <div className="badge_section-info">
           <h3>{jobTitle}</h3>
-          <div>@{twitter}</div>
+          <div className="badge_twitter">@{twitter}</div>
         </div>
         <div className="badge_footer">#platzi</div>
       </div>

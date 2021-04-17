@@ -25,6 +25,18 @@
 
 .Badges__buttons {
     display: flex;
-    justify-content: center;
+    width: 100%;
+    max-width: 580px;
+    padding: 0 1rem;
+    justify-content: flex-end;
+    margin: 0 auto;
     margin-bottom: 1rem;
+}
+
+.Badges__buttons a {
+    transition: all .2s;
+}
+
+.Badges__buttons a:hover {
+    transform: scale(1.1);
 }
