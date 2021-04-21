@@ -9,6 +9,7 @@
     border-radius: 5px;
     display: flex;
     padding: 1rem;
+    width: 100%;
 }
 
 .Badge__container li img {
@@ -49,4 +50,5 @@
     position: absolute;
     left: 55px;
     top: -2px;
+    width: 200px;
 }

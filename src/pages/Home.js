@@ -13,7 +13,7 @@ function Home() {
           <h1 className="title">Print your badges</h1>
           <p>The easiest way to manage your conference</p>
           <div className="Start__button">
-            <Link className="btn btn-primary" to="/badges/new">
+            <Link className="btn btn-primary" to="/badges">
               Start Now
             </Link>
           </div>
