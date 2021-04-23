@@ -2,11 +2,11 @@
   "badges": [
     {
       "id": "2de30c42-9deb-40fc-a41f-05e62b5939a7",
-      "firstName": "Freda",
-      "lastName": "Grady",
-      "email": "Leann_Berge@gmail.com",
-      "jobTitle": "Legacy Brand Director",
-      "twitter": "FredaGrady22221-7573",
+      "firstName": "Freddy",
+      "lastName": "Vega",
+      "email": "freddy@gmail.com",
+      "jobTitle": "CEO at Platzi",
+      "twitter": "Freddier",
       "avatarUrl": "https://www.gravatar.com/avatar/f63a9c45aca0e7e7de0782a6b1dff40b?d=identicon"
     },
     {
@@ -444,10 +444,26 @@
     {
       "firstName": "Brandon",
       "lastName": "Argel",
-      "email": "katooelmanco@gmail.com",
-      "jobTitle": "Frontend Developer",
+      "email": "brandargel@gmail.com",
+      "jobTitle": "Frontend Developer, Pentester y Data Scientist",
       "twitter": "BrandonArgelVD",
       "id": "w5UDdSd"
+    },
+    {
+      "firstName": "Karem",
+      "lastName": "Suarez",
+      "email": "karemsuarez@gmail.com",
+      "jobTitle": "Negocios, finanzas y emprendimiento",
+      "twitter": "karemsuarez",
+      "id": "2hr15DE"
+    },
+    {
+      "firstName": "Karen",
+      "lastName": "Oseguera",
+      "email": "anakaren@gmail.com",
+      "jobTitle": "estudiante",
+      "twitter": "karenoseguera24",
+      "id": "EGz6Z_q"
     }
   ]
 }

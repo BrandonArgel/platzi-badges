@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import md5 from 'md5';
 
 

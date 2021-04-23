@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import header from "../img/platziconf-logo.svg";
-import "./styles/BadgeNew.css";
+import "./styles/BadgeEdit.css";
 import Badge from "../components/Badge";
 import BadgeForm from "../components/BadgeForm";
 import api from '../api'
@@ -8,9 +8,9 @@ import PageLoading from "../components/PageLoading";
 import Swal from 'sweetalert2'
 
 
-class BadgeNew extends Component {
+class BadgeEdit extends Component {
   state = {
-    loading:false,
+    loading:true,
     error: null,
     form: {
       firstName: "",
@@ -20,6 +20,24 @@ class BadgeNew extends Component {
       twitter: "",
     },
   };
+
+  componentDidMount(){
+    this.fetchData()
+  }
+
+  fetchData = async e => {
+    this.setState ({ loading:true, error:null})
+
+    try {
+      const data = await api.badges.read(
+        this.props.match.params.badgeId
+      )
+
+      this.setState({loading:false, form:data})
+    } catch (error) {
+      this.setState({loading:false, error:error})
+    }
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -51,8 +69,8 @@ alertaError(){
 
 alertaExitosa() {
     Swal.fire({
-        title: 'Creacion Exitosa!',
-        text: 'Muchas gracias por inscribirte en la conferencia 😊',
+        title: 'Modificación Exitosa!',
+        text: 'La actualización de tu Badge ha sido realizada con éxito 😊',
         icon: 'success'
     }).then((result) => {
         if (result.value || !result.value) {
@@ -85,7 +103,7 @@ handleSubmit = async e => {
         });
 
         try {
-            await api.badges.create(this.state.form);
+            await api.badges.update(this.props.match.params.badgeId, this.state.form);
             this.setState({ loading: false });
             this.alertaExitosa();
 
@@ -107,8 +125,8 @@ handleSubmit = async e => {
     }
     return (
       <React.Fragment>
-        <div className="BadgeNew__hero">
-          <img className="BadgeNew__hero-image img-fluid" src={header} alt="Hero" />
+        <div className="BadgeEdit__hero">
+          <img className="BadgeEdit__hero-image img-fluid" src={header} alt="Hero" />
         </div>
         <div className="container">
           <div className="row">
@@ -123,7 +141,7 @@ handleSubmit = async e => {
               />
             </div>
             <div className="col-6">
-              <h1>New Attendant</h1>
+              <h1>Edit Attendant</h1>
               <BadgeForm
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
@@ -138,4 +156,4 @@ handleSubmit = async e => {
   }
 }
 
-export default BadgeNew;
+export default BadgeEdit;

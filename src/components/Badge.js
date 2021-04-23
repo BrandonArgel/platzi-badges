@@ -6,7 +6,7 @@ import "./styles/Badge.css";
 
 class Badge extends Component {
   render() {
-    const { firstName, lastName, avatarUrl, jobTitle, twitter } = this.props;
+    const { firstName, lastName, jobTitle, twitter } = this.props;
     return (
       <div className="badge">
         <div className="badge_header">

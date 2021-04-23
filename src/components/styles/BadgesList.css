@@ -1,5 +1,7 @@
 .Badge__container {
     margin: 0 auto;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .Badge__container li {
