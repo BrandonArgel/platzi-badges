@@ -16,7 +16,13 @@ export class Badges extends Component {
 
   componentDidMount(){
     this.fetchData()
+
+    // this.intervalId = setInterval(this.fetchData, 5000)
   }
+
+  // componentWillUnmount(){
+  //   clearInterval(this.intervalId);
+  // }
 
   fetchData = async () => {
     this.setState({loading: true, error: null})
