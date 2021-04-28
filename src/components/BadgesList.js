@@ -40,7 +40,7 @@ function BadgesList(props) {
           />
         </div>
         <h3>No badges were found</h3>
-        <Link className="btn btn-primary" to="/badges/new">
+        <Link className="btn btn-primary" to="/ReactJS/badges/new">
           Create new badge
         </Link>
       </Fragment>
@@ -66,7 +66,7 @@ function BadgesList(props) {
             <Link
               key={badge.id}
               className="text-reset text-decoration-none"
-              to={`/badges/${badge.id}`}
+              to={`/ReactJS/badges/${badge.id}`}
             >
               <li>
                 <Gravatar

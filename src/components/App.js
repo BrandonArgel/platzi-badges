@@ -13,18 +13,17 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route exact path="ReactJS//" component={Home} />
-          <Route exact path="ReactJS//home" component={Home} />
-          <Route exact path="ReactJS//badges" component={Badges} />
-          <Route exact path="ReactJS//badges/new" component={BadgeNew} />
+          <Route exact path="/ReactJS/" component={Home} />
+          <Route exact path="/ReactJS/badges" component={Badges} />
+          <Route exact path="/ReactJS/badges/new" component={BadgeNew} />
           <Route
             exact
-            path="ReactJS//badges/:badgeId"
+            path="/ReactJS/badges/:badgeId"
             component={BadgeDetails}
           />
           <Route
             exact
-            path="ReactJS//badges/:badgeId/edit"
+            path="/ReactJS/badges/:badgeId/edit"
             component={BadgeEdit}
           />
           <Route component={NotFound} />

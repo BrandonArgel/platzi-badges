@@ -61,7 +61,7 @@ function BadgeDetails(props) {
                 </button> */}
                 <Link
                   className="btn btn-primary mb-4"
-                  to={`/badges/${id}/edit`}
+                  to={`/ReactJS/badges/${id}/edit`}
                 >
                   Editar
                 </Link>
