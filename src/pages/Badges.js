@@ -5,17 +5,17 @@ import PageError from "../components/PageError";
 import "./styles/Badges.css";
 import confLogo from "../img/badge-header.svg";
 import { Link } from "react-router-dom";
-import api from '../api'
+import api from "../api";
 
 export class Badges extends Component {
   state = {
     loading: true,
     error: null,
-    data: []
-  }
+    data: [],
+  };
 
-  componentDidMount(){
-    this.fetchData()
+  componentDidMount() {
+    this.fetchData();
 
     // this.intervalId = setInterval(this.fetchData, 5000)
   }
@@ -25,22 +25,22 @@ export class Badges extends Component {
   // }
 
   fetchData = async () => {
-    this.setState({loading: true, error: null})
+    this.setState({ loading: true, error: null });
 
     try {
-      const data = await api.badges.list()
-      this.setState({loading: false, data: data})
+      const data = await api.badges.list();
+      this.setState({ loading: false, data: data });
     } catch (error) {
-      this.setState({loading: false, error: error})
+      this.setState({ loading: false, error: error });
     }
-  }
+  };
 
   render() {
-    if(this.state.loading === true){
+    if (this.state.loading === true) {
       return <PageLoading />;
     }
 
-    if(this.state.error){
+    if (this.state.error) {
       return <PageError error={this.state.error} />;
     }
 
@@ -57,7 +57,7 @@ export class Badges extends Component {
             </div>
           </div>
         </div>
-        <div className="Badge__container">
+        <div>
           <div className="Badges__buttons">
             <Link className="btn btn-primary" to="/badges/new">
               New Badge
