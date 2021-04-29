@@ -5,7 +5,7 @@ import PageError from "../components/PageError";
 import "./styles/Badges.css";
 import confLogo from "../img/badge-header.svg";
 import { Link } from "react-router-dom";
-import api from "../api";
+// import api from "../api";
 
 export class Badges extends Component {
   state = {
@@ -25,8 +25,6 @@ export class Badges extends Component {
   // }
 
   fetchData = async () => {
-    this.setState({ loading: true, error: null });
-
     this.setState({
       data: {
         badges: [
@@ -331,6 +329,8 @@ export class Badges extends Component {
         ],
       },
     });
+
+    this.setState({ loading: false, data: data });
 
     // try {
     //   const data = await api.badges.list();
