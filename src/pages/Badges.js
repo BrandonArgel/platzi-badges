@@ -5,7 +5,7 @@ import PageError from "../components/PageError";
 import "./styles/Badges.css";
 import confLogo from "../img/badge-header.svg";
 import { Link } from "react-router-dom";
-import api from "../api";
+// import api from "../api";
 
 export class Badges extends Component {
   state = {
@@ -28,7 +28,8 @@ export class Badges extends Component {
     this.setState({ loading: true, error: null });
 
     try {
-      const data = await api.badges.list();
+      const response = await fetch('https://my-json-server.typicode.com/BrandonArgel/ReactJS/badges');
+      const data = await response.json();
       this.setState({ loading: false, data: data });
     } catch (error) {
       this.setState({ loading: false, error: error });
