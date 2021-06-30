@@ -59,7 +59,7 @@ export class Badges extends Component {
         </div>
         <div>
           <div className="Badges__buttons">
-            <Link className="btn btn-primary" to="/badges/new">
+            <Link className="btn btn-primary" to="/ReactJS/badges/new">
               New Badge
             </Link>
           </div>
