@@ -16,8 +16,6 @@ export class Badges extends Component {
 
   componentDidMount() {
     this.fetchData();
-
-    // this.intervalId = setInterval(this.fetchData, 5000)
   }
 
   // componentWillUnmount(){
@@ -28,7 +26,9 @@ export class Badges extends Component {
     this.setState({ loading: true, error: null });
 
     try {
-      const response = await fetch('https://my-json-server.typicode.com/BrandonArgel/ReactJS/db');
+      const response = await fetch(
+        "https://my-json-server.typicode.com/BrandonArgel/ReactJS/db"
+      );
       const data = await response.json();
       this.setState({ loading: false, data: data });
     } catch (error) {

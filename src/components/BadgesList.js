@@ -22,7 +22,7 @@ function useSearchBadges(badges) {
 }
 
 function BadgesList(props) {
-  const badges = props.badges;
+  const badges = props.badges.badges;
   const { query, setQuery, filteredBadges } = useSearchBadges(badges);
 
   if (filteredBadges.length === 0) {
