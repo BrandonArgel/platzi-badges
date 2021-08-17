@@ -1,0 +1,8 @@
+{
+  "short_name": "Platzi Badges",
+  "name": "Platzi Badges",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000028",
+  "background_color": "#000028"
+}

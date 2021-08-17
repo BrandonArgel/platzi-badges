@@ -8,71 +8,65 @@ import { Link } from "react-router-dom";
 // import api from "../api";
 
 export class Badges extends Component {
-  state = {
-    loading: true,
-    error: null,
-    data: [],
-  };
+	state = {
+		loading: true,
+		error: null,
+		data: [],
+	};
 
-  componentDidMount() {
-    this.fetchData();
-  }
+	componentDidMount() {
+		this.fetchData();
+	}
 
-  // componentWillUnmount(){
-  //   clearInterval(this.intervalId);
-  // }
+	// componentWillUnmount(){
+	//   clearInterval(this.intervalId);
+	// }
 
-  fetchData = async () => {
-    this.setState({ loading: true, error: null });
+	fetchData = async () => {
+		this.setState({ loading: true, error: null });
 
-    try {
-      const response = await fetch(
-        "https://my-json-server.typicode.com/BrandonArgel/ReactJS/db"
-      );
-      const data = await response.json();
-      this.setState({ loading: false, data: data });
-    } catch (error) {
-      this.setState({ loading: false, error: error });
-    }
-  };
+		try {
+			const response = await fetch("https://my-json-server.typicode.com/BrandonArgel/ReactJS/db");
+			const data = await response.json();
+			this.setState({ loading: false, data: data });
+		} catch (error) {
+			this.setState({ loading: false, error: error });
+		}
+	};
 
-  render() {
-    if (this.state.loading === true) {
-      return <PageLoading />;
-    }
+	render() {
+		if (this.state.loading === true) {
+			return <PageLoading />;
+		}
 
-    if (this.state.error) {
-      return <PageError error={this.state.error} />;
-    }
+		if (this.state.error) {
+			return <PageError error={this.state.error} />;
+		}
 
-    return (
-      <React.Fragment>
-        <div className="Badges">
-          <div className="Badges__hero">
-            <div className="Badges__container">
-              <img
-                className="Badges_conf-logo"
-                src={confLogo}
-                alt="Conf Logo"
-              />
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className="Badges__buttons">
-            <Link className="btn btn-primary" to="/ReactJS/badges/new">
-              New Badge
-            </Link>
-          </div>
-          <div className="Badges__list">
-            <div className="Badges__container">
-              <BadgesList badges={this.state.data} />
-            </div>
-          </div>
-        </div>
-      </React.Fragment>
-    );
-  }
+		return (
+			<React.Fragment>
+				<div className="Badges">
+					<div className="Badges__hero">
+						<div className="Badges__container">
+							<img className="Badges_conf-logo" src={confLogo} alt="Conf Logo" />
+						</div>
+					</div>
+				</div>
+				<div>
+					<div className="Badges__buttons">
+						<Link className="btn btn-primary" to="/badges/new">
+							New Badge
+						</Link>
+					</div>
+					<div className="Badges__list">
+						<div className="Badges__container">
+							<BadgesList badges={this.state.data} />
+						</div>
+					</div>
+				</div>
+			</React.Fragment>
+		);
+	}
 }
 
 export default Badges;
