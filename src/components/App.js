@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 
 // components
 import Layout from "../components/Layout";
@@ -14,7 +14,7 @@ import BadgeDetailsContainer from "../pages/BadgeDetailsContainer";
 
 export default function App() {
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<Layout>
 				{/* este switch lo manda como un props a Layout */}
 				<Switch>
@@ -26,6 +26,6 @@ export default function App() {
 					<Route component={NotFound} />
 				</Switch>
 			</Layout>
-		</BrowserRouter>
+		</HashRouter>
 	);
 }
