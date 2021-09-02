@@ -21,22 +21,6 @@ export default class BadgeDetailsContainer extends Component {
 		this.fetchData();
 	}
 
-	alertError() {
-		Swal.fire({
-			customClass: {
-				title: "swal-title",
-				confirmButton: "swal-button-text",
-				htmlContainer: "swal-text",
-			},
-			title: "Opps!",
-			text: "Something unexpected happened 😅, please try again",
-			icon: "error",
-			background: "#000000",
-		});
-
-		// Controlar cuando sea un error 500 para que mande un mensaje que los server estan caidos o algo
-	}
-
 	alertSuccess() {
 		Swal.fire({
 			customClass: {
@@ -71,15 +55,16 @@ export default class BadgeDetailsContainer extends Component {
 	handleDeleteBadge = async (e) => {
 		e.preventDefault();
 		this.setState({ loading: true, error: null });
-		// Fix error
+		// Fix error unexpected token D in JSON at position 0
 		try {
 			await api.badges.remove(this.props.match.params.badgeId);
 			this.setState({ loading: false, modalIsOpen: false });
-			this.alertSuccess();
-			this.props.history.push("/badges");
 		} catch (error) {
-			this.setState({ loading: false, error: error });
+			this.setState({ loading: false });
+			// this.setState({ error: error });
 		}
+		this.props.history.push("/badges");
+		this.alertSuccess();
 	};
 
 	render() {
