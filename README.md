@@ -6,8 +6,8 @@ React App with an API
 
 View:
 
-- https://byredhunter.github.io/react-platziBadges/
+- https://brandonargel.me/platzi-badges/
 
 Link API
 
-- https://api-platzi-badges.vercel.app/api/badges
+- https://api.brandonargel.me/api/badges
