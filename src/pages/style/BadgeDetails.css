@@ -1,0 +1,41 @@
+.BadgeDetails__hero {
+    width: 100%;
+    padding: 2rem 0;
+    background: url('../../images/stars.svg'), rgb(0, 0, 0);
+    background-repeat: repeat;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.BadgeDetails__hero-attendant-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.actions__container h2 {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.BadgeDetails__buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.button-width,
+.button-blue {
+    min-width: 150px;
+
+}
+
+.button-blue {
+    background-color: rgb(0, 190, 225);
+    transition: all 0.2s ease-in-out;
+}
+
+.button-blue:hover {
+    background-color: rgb(0, 170, 215);
+    transform: scale(1.1);
+}

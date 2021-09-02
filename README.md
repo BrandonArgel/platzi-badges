@@ -1,20 +1,13 @@
-# ReactJS
+# react-platziBadges
 
-This project was made with ReactJS
+Platzi Badges
 
-Platzi-Badges, a proyect in which you can make by yourself your owns badges and use the CRUD metodology, Create, Read, Update and Delete your badges.
+React App with an API
 
-How to use?
+View:
 
-To clone the project:
-`$ git clone git@github.com:BrandonArgel/ReactJS.git`
+- https://byredhunter.github.io/react-platziBadges/
 
-Then the command:
-`$ npx npm-check-updates -u`
-To check updates
+Link API
 
-And by last:
-`$ npm install`
-To install the node modules required
-
-¡And that's all you can start the project!
+- https://api-platzi-badges.vercel.app/api/badges

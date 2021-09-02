@@ -1,41 +1,43 @@
 {
-  "homepage": "https://BrandonArgel.github.io/ReactJS",
-  "name": "platzi-badges",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "npm-run-all -p client server",
-    "client": "react-scripts start",
-    "server": "json-server --port 3001 --watch server/db.json",
-    "seed": "node server/seed.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "dependencies": {
-    "bootstrap": "^5.1.0",
-    "md5": "^2.3.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-router-dom": "5.2.0",
-    "react-scripts": "4.0.3",
-    "sweetalert2": "^11.1.2"
-  },
-  "devDependencies": {
-    "faker": "^5.5.3",
-    "gh-pages": "^3.2.3",
-    "json-server": "^0.16.3",
-    "npm-run-all": "^4.1.5"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+	"homepage": "https://BrandonArgel.github.io/platzi-badges",
+	"name": "platzi-badges",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"start": "react-scripts start",
+		"client": "react-scripts start",
+		"server": "json-server --port 3001 --watch server/db.json",
+		"seed": "node server/seed.js",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build"
+	},
+	"dependencies": {
+		"bootstrap": "^4.5.0",
+		"md5": "^2.2.1",
+		"react": "16.13.1",
+		"react-dom": "16.13.1",
+		"react-router-dom": "^5.2.0",
+		"react-scripts": "3.4.1",
+		"sweetalert2": "^11.1.4"
+	},
+	"devDependencies": {
+		"gh-pages": "^3.1.0"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	],
+	"main": "index.js",
+	"keywords": [],
+	"author": "Brandon Argel Verdeja Domínguez <brandargel@gmail.com>",
+	"license": "MIT",
+	"description": "Proyecto de Platzi Badges"
 }

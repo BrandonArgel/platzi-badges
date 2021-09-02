@@ -1,72 +1,58 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-import "./styles/BadgeDetails.css";
-import confLogo from "../img/platziconf-logo.svg";
+// static
+import "./style/BadgeDetails.css";
+import confLogo from "../images/platziconf-logo.svg";
+
+// components
 import Badge from "../components/Badge";
 import DeleteBadgeModal from "../components/DeleteBadgeModal";
 
-// function useIncreaseCount(max) {
-//   const [count, setCount] = React.useState(0);
-
-//   if (count > max) {
-//     setCount(0);
-//   }
-
-//   return [count, setCount];
-// }
-
-function BadgeDetails(props) {
-	// const [count, setCount] = useIncreaseCount(4);
-	const { firstName, lastName, email, twitter, jobTitle, id } = props.badge;
+export default function BadgeDetail(props) {
+	const badge = props.badge;
 	return (
-		<Fragment>
+		<div>
 			<div className="BadgeDetails__hero">
 				<div className="container">
 					<div className="row">
-						<div className="col-6">
-							<img src={confLogo} alt="Logo de la conferencia" />
+						<div className="col">
+							<img src={confLogo} alt="Logo de la Conferencia" />
 						</div>
-						<div className="col-6 BadgeDetails__hero-attendant-name">
+						<div className="col BadgeDetails__hero-attendant-name">
 							<h1>
-								{firstName} {lastName}
+								{badge.firstName} {badge.lastName}
 							</h1>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div className="container">
+			<div className="container mb-4">
 				<div className="row">
-					<div className="col">
+					<div className="col-8">
 						<Badge
-							firstName={firstName}
-							lastName={lastName}
-							email={email}
-							twitter={twitter}
-							jobTitle={jobTitle}
+							firstName={badge.firstName}
+							lastName={badge.lastName}
+							email={badge.email}
+							twitter={badge.twitter}
+							jobTitle={badge.jobTitle}
 						/>
 					</div>
-					<div className="col">
+					<div className="col-4 actions__container">
 						<h2>Actions</h2>
 						<div>
-							<div>
-								{/* <button
-                  onClick={() => {
-                    setCount(count + 1);
-                  }}
-                  className="btn btn-primary mr-4"
-                >
-                  Increase Count {count}
-                </button> */}
-								<Link className="btn btn-primary mb-4" to={`/badges/${id}/edit`}>
-									Editar
+							<div className="mb-3">
+								<Link className="btn btn-info button-blue" to={`/badges/${badge.id}/edit`}>
+									Edit
 								</Link>
 							</div>
+
 							<div>
-								<button onClick={props.onOpenModal} className="btn btn-danger">
+								<button onClick={props.onOpenModal} className="btn btn-danger button-width">
 									Delete
 								</button>
+
 								<DeleteBadgeModal
 									isOpen={props.modalIsOpen}
 									onClose={props.onCloseModal}
@@ -77,8 +63,6 @@ function BadgeDetails(props) {
 					</div>
 				</div>
 			</div>
-		</Fragment>
+		</div>
 	);
 }
-
-export default BadgeDetails;

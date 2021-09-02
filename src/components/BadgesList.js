@@ -1,36 +1,67 @@
-import React, { Fragment, useState, useMemo } from "react";
-import "./styles/BadgesList.css";
-import logoTwitter from "../img/twitter.svg";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Gravatar from "./Gravatar";
 
-function useSearchBadges(badges) {
-	const [query, setQuery] = useState("");
-	const [filteredBadges, setFilteredBadges] = useState(badges);
+// statics
+import twitter from "../images/twitter.png";
+import "./styles/BadgesList.css";
 
-	useMemo(() => {
-		const result = badges.filter((badge) => {
+// clase para un badge
+class BadgesListItem extends Component {
+	render() {
+		return (
+			<React.Fragment>
+				<img src={this.props.badge.avatarUrl} alt="Avatar" className="list-img" />
+				<div className="list-info">
+					<h5>
+						{this.props.badge.firstName} {this.props.badge.lastName}
+					</h5>
+					<div className="info-twitter">
+						<img src={twitter} alt="Twitter Icon" /> <span>@{this.props.badge.twitter}</span>
+					</div>
+					<p>{this.props.badge.jobTitle}</p>
+				</div>
+			</React.Fragment>
+		);
+	}
+}
+
+function useSearchBadges(badgesList) {
+	const [query, setQuery] = React.useState("");
+	const [filterBadges, setFilterBadges] = React.useState(badgesList);
+
+	// with Memo --hooks--
+	React.useMemo(() => {
+		const result = badgesList.filter((badge) => {
 			return `${badge.firstName} ${badge.lastName}`.toLowerCase().includes(query.toLowerCase());
 		});
 
-		setFilteredBadges(result);
-	}, [badges, query]);
+		setFilterBadges(result);
+	}, [badgesList, query]);
 
-	return { query, setQuery, filteredBadges };
+	return { query, setQuery, filterBadges };
 }
 
-function BadgesList(props) {
-	const badges = props.badges.badges;
-	const { query, setQuery, filteredBadges } = useSearchBadges(badges);
+export default function BadgesList(props) {
+	const badgesList = props.badges.reverse();
 
-	if (filteredBadges.length === 0) {
+	const { query, setQuery, filterBadges } = useSearchBadges(badgesList);
+
+	/* const filterBadges = badgesList.filter((badge) => {
+		return `${badge.firstName} ${badge.lastName}`
+			.toLowerCase()
+			.includes(query.toLowerCase())
+	}) */
+
+	if (filterBadges.length === 0) {
 		return (
-			<Fragment>
+			<div className="badges-list__container">
 				<div className="form-group">
-					<label>Fliter Badges</label>
+					<label htmlFor="search">Filter Badges</label>
 					<input
-						className="form-control"
 						type="text"
+						className="form-control"
+						autoFocus
+						id="search"
 						value={query}
 						onChange={(e) => {
 							setQuery(e.target.value);
@@ -41,47 +72,38 @@ function BadgesList(props) {
 				<Link className="btn btn-primary" to="/badges/new">
 					Create new badge
 				</Link>
-			</Fragment>
+			</div>
 		);
 	}
 
 	return (
-		<Fragment>
+		<div className="BadgesList">
 			<div className="form-group">
-				<label>Fliter Badges</label>
+				<label htmlFor="search">Filter Badges</label>
 				<input
-					className="form-control"
 					type="text"
+					className="form-control"
+					autoFocus
+					id="search"
 					value={query}
 					onChange={(e) => {
 						setQuery(e.target.value);
 					}}
 				/>
 			</div>
-			<ul className="list-unstyled Badge__container">
-				{filteredBadges &&
-					filteredBadges.map((badge) => {
-						return (
-							<Link key={badge.id} className="text-reset text-decoration-none" to={`/badges/${badge.id}`}>
-								<li>
-									<Gravatar className="badge_avatar" email={badge.email} alt="Avatar" />
-									<div className="Badge__container-data">
-										<p className="data">
-											{badge.firstName} {badge.lastName}
-										</p>
-										<p className="Badge__data">
-											<img className="Badge__data-img" src={logoTwitter} alt="Twitter Logo" />
-											<span className="twitter">@{badge.twitter}</span>
-										</p>
-										<p className="data">{badge.jobTitle}</p>
-									</div>
-								</li>
+			<ul className="list-unstyled">
+				{filterBadges.map((badge) => {
+					return (
+						<li key={badge.id}>
+							<Link className="text-reset text-decoration-none" to={`/badges/${badge.id}`}>
+								<div className="badge-list">
+									<BadgesListItem badge={badge} />
+								</div>
 							</Link>
-						);
-					})}
+						</li>
+					);
+				})}
 			</ul>
-		</Fragment>
+		</div>
 	);
 }
-
-export default BadgesList;

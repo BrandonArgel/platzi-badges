@@ -1,60 +1,76 @@
-.Badge__container {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column-reverse;
+ul {
+    margin-top: 40px;
 }
 
-.Badge__container li {
-    margin-bottom: 1rem;
-    background: #FFFFFF;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.23);
-    border-radius: 5px;
+.badge-list {
+    box-sizing: border-box;
+    background: rgb(0, 0, 0);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.1);
+    margin-bottom: 15px;
+    padding: 10px;
     display: flex;
-    padding: 1rem;
+    align-items: center;
+}
+
+.badge-list img.list-img {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.badge-list .list-info {
+    height: 100%;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.list-info h5 {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.list-info .info-twitter {
+    font-size: 12px;
+    color: #00acee;
+}
+
+.info-twitter img {
+    width: 15px;
+}
+
+.list-info p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin: 0;
+}
+
+.form-group label {
+    color: rgb(255, 255, 255);
+}
+
+.form-group input {
+    border-radius: 8px;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    background: transparent;
     width: 100%;
 }
 
-.Badge__container li img {
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
+.form-group input:focus,
+.form-group input:active,
+.form-group input:hover {
+    background-color: transparent;
+    caret-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    outline: none;
 }
 
-.Badge__container li p {
-    margin-bottom: 0;
-}
-
-.Badge__container-data {
-    display: flex;
-    flex-direction: column;
-}
-
-.Badge__container-data .Badge__data .Badge__data-img {
-    height: 20px;
-}
-
-.Badge__container p:first-child {
-    font-weight: bold;
-}
-
-.Badge__data {
-    font-weight: bold;
-    color: #00acee;
-    display: flex;
-    position: relative;
-}
-
-.data {
-    margin-left: 30px;
-}
-
-.twitter {
-    position: absolute;
-    left: 55px;
-    top: -2px;
-    width: 200px;
-}
-
-.form-group {
-    margin-bottom: 20px;
+.badges-list__container h3 {
+    color: rgb(255, 255, 255);
 }

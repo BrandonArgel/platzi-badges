@@ -1,29 +1,39 @@
-import React from "react";
-import "./styles/Home.css";
-import { Link } from "react-router-dom";
-import conf from "../img/platziconf-logo.svg";
-import astronauts from "../img/astronauts.svg";
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
-function Home() {
-	return (
-		<React.Fragment>
-			<div className="main">
-				<div className="home__container">
-					<img src={conf} alt="Conf Logo" />
-					<h1 className="title">Print your badges</h1>
-					<p>The easiest way to manage your conference</p>
-					<div className="Start__button">
-						<Link className="btn btn-primary" to="/badges">
-							Start Now
-						</Link>
+import './style/Home.css'
+import platziconfLogoImage from '../images/platziconf-logo.svg'
+import astronautsImage from '../images/astronauts.svg'
+
+export default class Home extends Component {
+	render() {
+		return (
+			<div className='Home'>
+				<div className='container'>
+					<div className='row'>
+						<div className='Home__col col-12 col-md-4'>
+							<img
+								src={platziconfLogoImage}
+								alt='Platzi Conf Logo'
+								className='img-fluid mb-2'
+							/>
+
+							<h1>Badge Management System</h1>
+							<Link className='btn btn-primary' to='/badges'>
+								Start
+							</Link>
+						</div>
+
+						<div className='Home__col d-none d-md-block col-md-8'>
+							<img
+								src={astronautsImage}
+								alt='Astronauts'
+								className='img-fluid p-4'
+							/>
+						</div>
 					</div>
 				</div>
-				<div>
-					<img className="astronauts" src={astronauts} alt="Astronauts" />
-				</div>
 			</div>
-		</React.Fragment>
-	);
+		)
+	}
 }
-
-export default Home;

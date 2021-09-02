@@ -1,13 +1,20 @@
 import React, { Component } from "react";
-import header from "../img/platziconf-logo.svg";
-import "./styles/BadgeNew.css";
-import Badge from "../components/Badge";
-import BadgeForm from "../components/BadgeForm";
-import api from "../api";
-import PageLoading from "../components/PageLoading";
 import Swal from "sweetalert2";
+import md5 from "md5";
 
-class BadgeNew extends Component {
+// files
+import "./style/BadgeNew.css";
+import header from "../images/platziconf-logo.svg";
+
+// components
+import BadgeForm from "../components/BadgeForm";
+import Badge from "../components/Badge";
+import PageLoading from "../components/PageLoading";
+
+// api
+import api from "../api";
+
+export default class BadgeNew extends Component {
 	state = {
 		loading: false,
 		error: null,
@@ -17,6 +24,7 @@ class BadgeNew extends Component {
 			email: "",
 			jobTitle: "",
 			twitter: "",
+			avatarUrl: "",
 		},
 	};
 
@@ -31,28 +39,44 @@ class BadgeNew extends Component {
 
 	alertaFaltanDatos(faltantes) {
 		Swal.fire({
+			customClass: {
+				title: "swal-title",
+				confirmButton: "swal-button-text",
+				htmlContainer: "swal-text",
+			},
 			title: "Alto ahi!",
 			text: `Te faltan campos por rellenar 🧐
          ${faltantes}`,
 			icon: "error",
+			background: "#000000",
 		});
 	}
 
-	alertaError() {
+	alertError() {
 		Swal.fire({
+			customClass: {
+				title: "swal-title",
+				confirmButton: "swal-button-text",
+				htmlContainer: "swal-text",
+			},
 			title: "Opps!",
-			text: `Ha ocurrido algo inesperado 😅, vuelve a intentarlo nuevamente`,
+			text: "Something unexpected happened 😅, please try again",
 			icon: "error",
+			background: "#000000",
 		});
-
-		// Controlar cuando sea un error 500 para que mande un mensaje que los server estan caidos o algo
 	}
 
-	alertaExitosa() {
+	alertSuccess() {
 		Swal.fire({
-			title: "Creacion Exitosa!",
-			text: "Muchas gracias por inscribirte en la conferencia 😊",
+			customClass: {
+				title: "swal-title",
+				confirmButton: "swal-button-text",
+				htmlContainer: "swal-text",
+			},
+			title: "Successfully created!",
+			text: "Thank you very much for registering for the conference 😊",
 			icon: "success",
+			background: "#000000",
 		}).then((result) => {
 			if (result.value || !result.value) {
 				this.props.history.push("/badges");
@@ -63,6 +87,7 @@ class BadgeNew extends Component {
 	// Capturar el evento del envio de datos
 	handleSubmit = async (e) => {
 		e.preventDefault();
+		this.setState({ loading: true, error: null });
 		let datosFaltantes = [];
 
 		for (const propiedad in this.state.form) {
@@ -83,6 +108,7 @@ class BadgeNew extends Component {
 		) {
 			let camposFaltantes = datosFaltantes.join(`, `);
 			this.alertaFaltanDatos(camposFaltantes);
+			this.setState({ loading: false });
 		} else {
 			this.setState({
 				loading: true,
@@ -90,9 +116,13 @@ class BadgeNew extends Component {
 			});
 
 			try {
+				// añadimos un valor al avatarUrl
+				this.state.form.avatarUrl = `https://www.gravatar.com/avatar/${md5(
+					this.state.form.email
+				)}?d=identicon`;
 				await api.badges.create(this.state.form);
 				this.setState({ loading: false });
-				this.alertaExitosa();
+				this.alertSuccess();
 
 				this.props.history.push("/badges");
 			} catch (error) {
@@ -101,38 +131,44 @@ class BadgeNew extends Component {
 					loading: false,
 				});
 
-				this.alertaError();
+				this.alertError();
 			}
 		}
 	};
 
 	render() {
-		if (this.state.loading === true) {
+		if (this.state.loading) {
 			return <PageLoading />;
 		}
+
 		return (
 			<React.Fragment>
 				<div className="BadgeNew__hero">
-					<img className="BadgeNew__hero-image img-fluid" src={header} alt="Hero" />
+					<div className="container-fluid d-flex justify-content-center">
+						<img className="BadgeNew__hero-image img-fluid" src={header} alt="Logo" />
+					</div>
 				</div>
-				<div className="container">
+
+				<div className="container-fluid">
 					<div className="row">
-						<div className="col-6">
+						<div className="col-sm-12 col-md-7">
 							<Badge
-								firstName={this.state.form.firstName || "FIRST_NAME"}
-								lastName={this.state.form.lastName || "LAST_NAME"}
-								twitter={this.state.form.twitter || "TWITTER"}
-								jobTitle={this.state.form.jobTitle || "JOB_TITLE"}
-								email={this.state.form.email || "EMAIL"}
-								avatarUrl="https://static.platzi.com/media/avatars/avatars/BrandArgel_b9b55b25-1391-4279-a81f-103150559ad8.jpg"
+								firstName={this.state.form.firstName || "FirstName"}
+								lastName={this.state.form.lastName || "LastName"}
+								twitter={this.state.form.twitter || "my_nickname"}
+								jobTitle={this.state.form.jobTitle || "Job Title"}
+								email={this.state.form.email || "my_email@gmail.com"}
+								// avatar={this.state.form.email}
+								// avatar='https://avatars1.githubusercontent.com/u/55221373?s=460&u=a2c9a5fb3c276bf93773dbe3a1bf71d2e9c3525b&v=4'
 							/>
 						</div>
-						<div className="col-6">
-							<h1>New Attendant</h1>
+
+						<div className="col-sm-12 col-md-5 mt-5 mt-md-0 mb-5 new-badge__container">
+							<h2>New Attendant</h2>
 							<BadgeForm
 								onChange={this.handleChange}
-								onSubmit={this.handleSubmit}
 								formValues={this.state.form}
+								onSubmit={this.handleSubmit}
 								error={this.state.error}
 							/>
 						</div>
@@ -142,5 +178,3 @@ class BadgeNew extends Component {
 		);
 	}
 }
-
-export default BadgeNew;

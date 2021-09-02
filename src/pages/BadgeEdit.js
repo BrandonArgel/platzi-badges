@@ -1,13 +1,20 @@
 import React, { Component } from "react";
-import header from "../img/platziconf-logo.svg";
-import "./styles/BadgeEdit.css";
-import Badge from "../components/Badge";
-import BadgeForm from "../components/BadgeForm";
-import api from "../api";
-import PageLoading from "../components/PageLoading";
 import Swal from "sweetalert2";
+import md5 from "md5";
 
-class BadgeEdit extends Component {
+// files
+import "./style/BadgeEdit.css";
+import header from "../images/platziconf-logo.svg";
+
+// components
+import BadgeForm from "../components/BadgeForm";
+import Badge from "../components/Badge";
+import PageLoading from "../components/PageLoading";
+
+// api
+import api from "../api";
+
+export default class BadgeEdit extends Component {
 	state = {
 		loading: true,
 		error: null,
@@ -17,6 +24,7 @@ class BadgeEdit extends Component {
 			email: "",
 			jobTitle: "",
 			twitter: "",
+			avatarUrl: "",
 		},
 	};
 
@@ -24,12 +32,41 @@ class BadgeEdit extends Component {
 		this.fetchData();
 	}
 
+	alertError() {
+		Swal.fire({
+			customClass: {
+				title: "swal-title",
+				confirmButton: "swal-button-text",
+				htmlContainer: "swal-text",
+			},
+			title: "Opps!",
+			text: "Something unexpected happened 😅, please try again",
+			icon: "error",
+			background: "#000000",
+		});
+
+		// Controlar cuando sea un error 500 para que mande un mensaje que los server estan caidos o algo
+	}
+
+	alertSuccess() {
+		Swal.fire({
+			customClass: {
+				title: "swal-title",
+				confirmButton: "swal-button-text",
+				htmlContainer: "swal-text",
+			},
+			title: "Successfully modified!",
+			text: "Your badge has been modified",
+			icon: "success",
+			background: "#000000",
+		});
+	}
+
 	fetchData = async (e) => {
 		this.setState({ loading: true, error: null });
 
 		try {
 			const data = await api.badges.read(this.props.match.params.badgeId);
-
 			this.setState({ loading: false, form: data });
 		} catch (error) {
 			this.setState({ loading: false, error: error });
@@ -45,110 +82,58 @@ class BadgeEdit extends Component {
 		});
 	};
 
-	alertaFaltanDatos(faltantes) {
-		Swal.fire({
-			title: "Alto ahi!",
-			text: `Te faltan campos por rellenar 🧐
-         ${faltantes}`,
-			icon: "error",
-		});
-	}
-
-	alertaError() {
-		Swal.fire({
-			title: "Opps!",
-			text: `Ha ocurrido algo inesperado 😅, vuelve a intentarlo nuevamente`,
-			icon: "error",
-		});
-
-		// Controlar cuando sea un error 500 para que mande un mensaje que los server estan caidos o algo
-	}
-
-	alertaExitosa() {
-		Swal.fire({
-			title: "Modificación Exitosa!",
-			text: "La actualización de tu Badge ha sido realizada con éxito 😊",
-			icon: "success",
-		}).then((result) => {
-			if (result.value || !result.value) {
-				this.props.history.push("/badges");
-			}
-		});
-	}
-
-	// Capturar el evento del envio de datos
 	handleSubmit = async (e) => {
 		e.preventDefault();
-		let datosFaltantes = [];
+		this.setState({ loading: true, error: null });
 
-		for (const propiedad in this.state.form) {
-			if (this.state.form.hasOwnProperty(propiedad)) {
-				const valor = this.state.form[propiedad];
-				if (valor === "") {
-					datosFaltantes.push(propiedad);
-				}
-			}
-		}
+		try {
+			// añadimos un valor al avatarUrl
+			this.state.form.avatarUrl = `https://www.gravatar.com/avatar/${md5(this.state.form.email)}?d=identicon`;
+			await api.badges.update(this.props.match.params.badgeId, this.state.form);
+			this.setState({ loading: false });
+			this.alertSuccess();
 
-		if (
-			this.state.form.firstName === "" ||
-			this.state.form.lastName === "" ||
-			this.state.form.email === "" ||
-			this.state.form.jobTitle === "" ||
-			this.state.form.twitter === ""
-		) {
-			let camposFaltantes = datosFaltantes.join(`, `);
-			this.alertaFaltanDatos(camposFaltantes);
-		} else {
-			this.setState({
-				loading: true,
-				error: null,
-			});
-
-			try {
-				await api.badges.update(this.props.match.params.badgeId, this.state.form);
-				this.setState({ loading: false });
-				this.alertaExitosa();
-
-				this.props.history.push("/badges");
-			} catch (error) {
-				this.setState({
-					error: error,
-					loading: false,
-				});
-
-				this.alertaError();
-			}
+			// dirigimos a badge para ver la lista
+			this.props.history.push("/badges");
+		} catch (error) {
+			this.setState({ loading: false, error: error });
+			this.alertError();
 		}
 	};
 
 	render() {
-		if (this.state.loading === true) {
+		if (this.state.loading) {
 			return <PageLoading />;
 		}
+
 		return (
 			<React.Fragment>
 				<div className="BadgeEdit__hero">
-					<img className="BadgeEdit__hero-image img-fluid" src={header} alt="Hero" />
+					<div className="container-fluid d-flex justify-content-center">
+						<img className="BadgeEdit__hero-image img-fluid" src={header} alt="Logo" />
+					</div>
 				</div>
-				<div className="container">
+
+				<div className="container-fluid">
 					<div className="row">
-						<div className="col-6">
+						<div className="col-sm-12 col-md-7">
 							<Badge
-								firstName={this.state.form.firstName || "FIRST_NAME"}
-								lastName={this.state.form.lastName || "LAST_NAME"}
-								twitter={this.state.form.twitter || "TWITTER"}
-								jobTitle={this.state.form.jobTitle || "JOB_TITLE"}
-								email={this.state.form.email || "EMAIL"}
-								avatarUrl="https://static.platzi.com/media/avatars/avatars/BrandArgel_b9b55b25-1391-4279-a81f-103150559ad8.jpg"
+								firstName={this.state.form.firstName || "FirstName"}
+								lastName={this.state.form.lastName || "LastName"}
+								twitter={this.state.form.twitter || "my_nickname"}
+								jobTitle={this.state.form.jobTitle || "Job Title"}
+								email={this.state.form.email || "my_email@gmail.com"}
+								// avatar={this.state.form.email}
+								// avatar='https://avatars1.githubusercontent.com/u/55221373?s=460&u=a2c9a5fb3c276bf93773dbe3a1bf71d2e9c3525b&v=4'
 							/>
 						</div>
-						<div className="col-6">
-							<h1>Edit Attendant</h1>
+
+						<div className="col-sm-12 col-md-5 mt-5 mt-md-0 mb-5 edit__container">
+							<h2>Edit your Badge</h2>
 							<BadgeForm
 								onChange={this.handleChange}
-								onSubmit={this.handleSubmit}
 								formValues={this.state.form}
+								onSubmit={this.handleSubmit}
 								error={this.state.error}
 							/>
 						</div>
@@ -158,5 +143,3 @@ class BadgeEdit extends Component {
 		);
 	}
 }
-
-export default BadgeEdit;

@@ -1,23 +1,19 @@
 import React, { Component } from "react";
+import Swal from "sweetalert2";
 
+// api
+import api from "../api";
+
+// components
 import PageLoading from "../components/PageLoading";
 import PageError from "../components/PageError";
-
-import api from "../api";
 import BadgeDetails from "./BadgeDetails";
 
-class BadgeDetailsContainer extends Component {
+export default class BadgeDetailsContainer extends Component {
 	state = {
 		loading: true,
 		error: null,
-		form: {
-			firstName: "",
-			lastName: "",
-			email: "",
-			jobTitle: "",
-			twitter: "",
-			avatarUrl: "",
-		},
+		data: undefined,
 		modalIsOpen: false,
 	};
 
@@ -25,55 +21,84 @@ class BadgeDetailsContainer extends Component {
 		this.fetchData();
 	}
 
+	alertError() {
+		Swal.fire({
+			customClass: {
+				title: "swal-title",
+				confirmButton: "swal-button-text",
+				htmlContainer: "swal-text",
+			},
+			title: "Opps!",
+			text: "Something unexpected happened 😅, please try again",
+			icon: "error",
+			background: "#000000",
+		});
+
+		// Controlar cuando sea un error 500 para que mande un mensaje que los server estan caidos o algo
+	}
+
+	alertSuccess() {
+		Swal.fire({
+			customClass: {
+				title: "swal-title",
+				confirmButton: "swal-button-text",
+				htmlContainer: "swal-text",
+			},
+			title: "Successfully removed!",
+			text: "Your badge has been removed",
+			icon: "success",
+			background: "#000000",
+		});
+	}
+
 	fetchData = async () => {
 		this.setState({ loading: true, error: null });
 
 		try {
 			const data = await api.badges.read(this.props.match.params.badgeId);
-
 			this.setState({ loading: false, data: data });
 		} catch (error) {
 			this.setState({ loading: false, error: error });
 		}
 	};
 
-	handleCloseModal = (e) => {
-		this.setState({ modalIsOpen: false });
-	};
-
 	handleOpenModal = (e) => {
 		this.setState({ modalIsOpen: true });
 	};
-
+	handleCloseModal = (e) => {
+		this.setState({ modalIsOpen: false });
+	};
 	handleDeleteBadge = async (e) => {
 		this.setState({ loading: true, error: null });
+
 		try {
 			await api.badges.remove(this.props.match.params.badgeId);
 			this.setState({ loading: false });
-			this.props.history.push("/badges");
 		} catch (error) {
+			console.log(error);
 			this.setState({ loading: false, error: error });
 		}
+		this.alertSuccess();
+		this.props.history.push("/badges");
 	};
 
 	render() {
 		if (this.state.loading) {
 			return <PageLoading />;
 		}
+
 		if (this.state.error) {
 			return <PageError error={this.state.error} />;
 		}
 
 		return (
 			<BadgeDetails
+				badge={this.state.data}
 				onCloseModal={this.handleCloseModal}
 				onOpenModal={this.handleOpenModal}
-				modalIsOpen={this.state.modalIsOpen}
 				onDeleteBadge={this.handleDeleteBadge}
-				badge={this.state.data}
+				modalIsOpen={this.state.modalIsOpen}
 			/>
 		);
 	}
 }
-
-export default BadgeDetailsContainer;

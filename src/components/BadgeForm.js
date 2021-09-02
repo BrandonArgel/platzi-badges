@@ -1,86 +1,76 @@
 import React, { Component } from "react";
 
-export class BadgeForm extends Component {
-  state = {};
-  handleCLick = (e) => {
-    console.log("Button was clicked");
-  };
+export default class BadgeForm extends Component {
+	/* handleSubmit = (e) => {
+		e.preventDefault()
+		console.log(this.state)
+	} */
 
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Form was submitted");
-  //   console.log(this.state);
-  // };
+	render() {
+		return (
+			<form onSubmit={this.props.onSubmit}>
+				<div className="form-group">
+					<label>First Name</label>
+					<input
+						className="form-control"
+						type="text"
+						name="firstName"
+						autoFocus
+						onChange={this.props.onChange}
+						value={this.props.formValues.firstName}
+					/>
+				</div>
+				<div className="form-group">
+					<label>Last Name</label>
+					<input
+						className="form-control"
+						type="text"
+						name="lastName"
+						onChange={this.props.onChange}
+						value={this.props.formValues.lastName}
+					/>
+				</div>
+				<div className="form-group">
+					<label>Email</label>
+					<input
+						className="form-control"
+						type="email"
+						name="email"
+						onChange={this.props.onChange}
+						value={this.props.formValues.email}
+					/>
+				</div>
+				<div className="form-group">
+					<label>Job Title</label>
+					<input
+						className="form-control"
+						type="text"
+						name="jobTitle"
+						onChange={this.props.onChange}
+						value={this.props.formValues.jobTitle}
+					/>
+				</div>
+				<div className="form-group">
+					<label>Twitter</label>
+					<input
+						className="form-control"
+						type="text"
+						name="twitter"
+						onChange={this.props.onChange}
+						value={this.props.formValues.twitter}
+					/>
+				</div>
 
-  render() {
-    return (
-      <div>
-        <form className="formulario" onSubmit={this.props.onSubmit}>
-          <div className="form-group">
-            <label>First Name</label>
-            <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="text"
-              name="firstName"
-              placeholder="Introduce tu nombre"
-              value={this.props.formValues.firstName}
-            />
-          </div>
-          <div className="form-group">
-            <label>Last Name</label>
-            <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="text"
-              name="lastName"
-              placeholder="Introduce tu apellido"
-              value={this.props.formValues.lastName}
-            />
-          </div>
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="email"
-              name="email"
-              placeholder="Introduce tu apellido"
-              value={this.props.formValues.email}
-            />
-          </div>
-          <div className="form-group">
-            <label>Job Title</label>
-            <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="text"
-              name="jobTitle"
-              placeholder="Introduce tu trabajo"
-              value={this.props.formValues.jobTitle}
-            />
-          </div>
-          <div className="form-group">
-            <label>Twitter</label>
-            <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="text"
-              name="twitter"
-              placeholder="Introduce tu usuario"
-              value={this.props.formValues.twitter}
-            />
-          </div>
+				<button type="submit" className="btn btn-primary">
+					Save
+				</button>
 
-          <button onClick={this.handleCLick} className="btn btn-primary">
-            Save
-          </button>
-
-          {this.props.error && <p className="text-danger">{this.props.error.message}</p>}
-        </form>
-      </div>
-    );
-  }
+				{this.props.error && (
+					<div class="mt-3 alert alert-danger" role="alert">
+						<strong>Ups!!!</strong> {this.props.error.message}
+					</div>
+				)}
+			</form>
+		);
+	}
 }
-
-export default BadgeForm;

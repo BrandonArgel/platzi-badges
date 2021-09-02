@@ -1,17 +1,17 @@
 .BadgeEdit__hero {
     width: 100%;
     padding: 2rem 0;
-    background: url('../../img/stars.svg'), #1B1B25;
+    background: url('../../images/stars.svg'), rgb(0, 0, 0);
     background-repeat: repeat;
+    margin-bottom: 1rem;
     color: #ffffff;
-    display: flex;
-    justify-content: center;
 }
 
 .BadgeEdit__hero-image {
     max-height: 100px;
 }
 
-.formulario{
-    margin-bottom: 50px;
+.edit__container h2 {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
 }

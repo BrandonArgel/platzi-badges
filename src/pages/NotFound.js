@@ -1,9 +1,13 @@
 import React from "react";
-import nf from "../img/404.svg";
-import "./styles/NotFound.css";
 
-function NotFound() {
-	return <img className="NotFound" src={nf} alt="Not Found" />;
+// static
+import imgNotFound from "../images/not_found.svg";
+import "./style/NotFound.css";
+
+export default function NotFound() {
+	return (
+		<div className="container-notFound">
+			<img className="notFound-image" src={imgNotFound} alt="Page not found" />
+		</div>
+	);
 }
-
-export default NotFound;

@@ -1,28 +1,33 @@
-import React, { Component } from "react";
-import confLogo from "../img/badge-header.svg";
+import React from "react";
+
+// static
+import "./styles/Badge.css";
+import confLogo from "../images/badge-header.svg";
+
+// components
 import Gravatar from "./Gravatar";
 
-import "./styles/Badge.css";
-
-class Badge extends Component {
+class Badge extends React.Component {
 	render() {
-		const { firstName, lastName, jobTitle, twitter } = this.props;
 		return (
-			<div className="badge">
-				<div className="badge_header">
+			<div className="Badge">
+				<div className="Badge__header">
 					<img src={confLogo} alt="Logo de la conferencia" />
 				</div>
-				<div className="badge_section-name">
-					<Gravatar className="badge_avatar" email={this.props.email} alt="Avatar" />
-					<h1 className="badge_name">
-						{firstName} <br /> {lastName}
+
+				<div className="Badge__section-name">
+					<Gravatar className="Badge__avatar" email={this.props.email} />
+					<h1>
+						{this.props.firstName} <br /> {this.props.lastName}
 					</h1>
 				</div>
-				<div className="badge_section-info">
-					<h3 className="badge_job">{jobTitle}</h3>
-					<div className="badge_twitter">@{twitter}</div>
+
+				<div className="Badge__section-info">
+					<h3>{this.props.jobTitle}</h3>
+					<p>@{this.props.twitter}</p>
 				</div>
-				<div className="badge_footer">#platzi</div>
+
+				<div className="Badge__footer">#platziconf</div>
 			</div>
 		);
 	}
