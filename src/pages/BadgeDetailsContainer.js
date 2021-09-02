@@ -69,17 +69,17 @@ export default class BadgeDetailsContainer extends Component {
 		this.setState({ modalIsOpen: false });
 	};
 	handleDeleteBadge = async (e) => {
+		e.preventDefault();
 		this.setState({ loading: true, error: null });
-
+		// Fix error
 		try {
 			await api.badges.remove(this.props.match.params.badgeId);
-			this.setState({ loading: false });
+			this.setState({ loading: false, modalIsOpen: false });
+			this.alertSuccess();
+			this.props.history.push("/badges");
 		} catch (error) {
-			console.log(error);
 			this.setState({ loading: false, error: error });
 		}
-		this.alertSuccess();
-		this.props.history.push("/badges");
 	};
 
 	render() {

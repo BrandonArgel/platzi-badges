@@ -10,6 +10,7 @@ import header from "../images/platziconf-logo.svg";
 import BadgeForm from "../components/BadgeForm";
 import Badge from "../components/Badge";
 import PageLoading from "../components/PageLoading";
+import PageError from "../components/PageError";
 
 // api
 import api from "../api";
@@ -139,6 +140,10 @@ export default class BadgeNew extends Component {
 	render() {
 		if (this.state.loading) {
 			return <PageLoading />;
+		}
+
+		if (this.state.error) {
+			return <PageError error={this.state.error} />;
 		}
 
 		return (

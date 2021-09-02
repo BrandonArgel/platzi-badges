@@ -69,7 +69,7 @@ export default function BadgesList(props) {
 					/>
 				</div>
 				<h3>No badges were found</h3>
-				<Link className="btn btn-primary" to="/badges/new">
+				<Link className="btn btn-primary btn-center" to="/badges/new">
 					Create new badge
 				</Link>
 			</div>

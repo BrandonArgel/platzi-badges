@@ -73,4 +73,11 @@ ul {
 
 .badges-list__container h3 {
     color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.btn-center {
+    margin: 0 auto;
+    display: block;
+    width: fit-content;
 }
