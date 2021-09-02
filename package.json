@@ -24,7 +24,7 @@
 		"sweetalert2": "^11.1.4"
 	},
 	"devDependencies": {
-		"gh-pages": "^3.1.0"
+		"gh-pages": "^3.2.3"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
