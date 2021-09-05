@@ -2,7 +2,7 @@
 
 Platzi Badges
 
-React App with an API
+Project in React with API
 
 View:
 
