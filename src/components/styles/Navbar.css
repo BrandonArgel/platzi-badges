@@ -1,7 +1,7 @@
 .Navbar {
     width: 100%;
     padding: 0.5rem 0;
-    background-color: rgb(0, 33, 58);
+    background-color: rgb(0, 13, 38);
 }
 
 .Navbar__brand {
@@ -21,7 +21,7 @@
 }
 
 .dropdown-menu {
-    background-color: rgb(0, 33, 58);
+    background-color: rgb(0, 13, 38);
 }
 
 .dropdown-menu a {
@@ -29,7 +29,7 @@
 }
 
 .dropdown-menu a:hover {
-    background-color: rgb(0, 0, 40);
+    background-color: rgba(0, 0, 0, 0.3);
     color: #ffffff;
     text-decoration: none;
 }

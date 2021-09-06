@@ -30,7 +30,7 @@ export default function BadgeDetail(props) {
 
 			<div className="container mb-4">
 				<div className="row">
-					<div className="col-8">
+					<div className="col-8 Badge__container">
 						<Badge
 							firstName={badge.firstName}
 							lastName={badge.lastName}
