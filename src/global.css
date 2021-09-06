@@ -8,12 +8,12 @@
 
 body {
     font-family: 'Lato', 'Helvetica Neue', sans-serif;
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(18, 18, 18);
 }
 
 /*Personalizar Scroll*/
 ::-webkit-scrollbar {
-    background: rgb(20, 20, 20);
+    background: rgb(18, 18, 18);
     width: 10px;
 }
 
