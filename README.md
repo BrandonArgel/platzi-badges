@@ -6,7 +6,7 @@ Project in React with API
 
 View:
 
-- https://brandonargel.me/platzi-badges/
+- https://brandonargel.github.io/platzi-badges/
 
 Link API
 
