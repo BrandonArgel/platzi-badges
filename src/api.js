@@ -1,4 +1,4 @@
-const BASE_URL = "https://api.brandonargel.me/api/badges";
+const BASE_URL = "https://api.brandonargel.com/api/badges";
 
 async function callApi(endpoint, options = {}) {
 	options.headers = {

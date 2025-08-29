@@ -10,4 +10,4 @@ View:
 
 Link API
 
-- https://api.brandonargel.me/api/badges
+- https://api.brandonargel.com/api/badges
